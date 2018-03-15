@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'player',
+  selector: 'sig-player',
   template: `
     <vg-player>
       <video [vgMedia]="media" #media id="singleVideo" preload="auto" controls>
@@ -9,7 +9,20 @@ import { Component, OnInit } from '@angular/core';
       </video>
     </vg-player>
   `,
-  styles: []
+  styles: [`
+    vg-player {
+      position: absolute;
+      padding: 0;
+      margin: 0;
+      width: 100vw;
+      height: 100vh;
+      top: 0;
+      left: 0;
+    }
+    vg-player video {
+      width: 100%;
+    }
+  `]
 })
 export class PlayerComponent implements OnInit {
 

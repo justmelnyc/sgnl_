@@ -18,7 +18,11 @@
     "update": "./node_modules/.bin/nx update",
     "update:check": "./node_modules/.bin/nx update check",
     "update:skip": "./node_modules/.bin/nx update skip",
-    "postinstall": "./node_modules/.bin/nx postinstall"
+    "postinstall": "./node_modules/.bin/nx postinstall",
+    "ctrl": "ng serve -o -a=ctrl -p=4200",
+    "rcvr": "ng serve -o -a=rcvr -p=4201",
+    "sgnl": "npm run ctrl & npm run rcvr"
+
   },
   "private": true,
   "dependencies": {

@@ -3,23 +3,26 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-root',
   template: `    
-    <div style="text-align:center; background-color: #74FAA2; color: #22424; font-family: Fira Mono">
-      <h1>
-        Welcome to an Angular CLI app built with Nrwl Nx!
-      </h1>
-      <img width="300" src="assets/nx-logo.png">
-    </div>
+    <h2 class="heading">RCVR_</h2>
 
-    <h2 style="text-align:center; background-color: #74FAA2; color: #22424; font-family: Fira Mono">RCVR_</h2>
-
-    <player></player>
+    <sig-player></sig-player>
     <router-outlet></router-outlet>
 
   `,
-  styles: [``]
+  styles: [`
+    .heading {
+      position: relative;
+      text-align: center;
+      background-color: #74FAA2;
+      color: #242424;
+      font-family: Fira Mono;
+      z-index: 1000;
+    }
+  `]
 })
 export class AppComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 }

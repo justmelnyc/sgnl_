@@ -2,26 +2,22 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `
-    <div style="text-align:center; background-color: #FADD79; color: #242424; font-family: Fira Mono">
-      <h1>
-        Welcome to an Angular CLI app built with Nrwl Nx!
-      </h1>
-      <img width="300" src="assets/nx-logo.png">
-    </div>
-
-    <h2 style="text-align:center; background-color: #FADD79; color: #242424; font-family: Fira Mono">CTRL_</h2>
-
-    An open source toolkit for enterprise Angular applications.
-
-    Nx is designed to help you create and build enterprise grade Angular applications. It provides an opinionated approach to application project structure and patterns.
-
-    <h2>Quick Start & Documentation</h2>
-
-    <a href="https://nrwl.io/nx">Watch a 5-minute video on how to get started with Nx.</a>
+  template: `    
+    <h2 class="heading">CTRL_</h2>
+    <sig-player></sig-player>
+    
     <router-outlet></router-outlet>
   `,
-  styles: [``]
+  styles: [`
+    .heading {
+      position: relative;
+      text-align: center;
+      background-color: #FADD79;
+      color: #242424;
+      font-family: Fira Mono;
+      z-index: 1000;
+    }
+  `]
 })
 export class AppComponent implements OnInit {
   constructor() {}
