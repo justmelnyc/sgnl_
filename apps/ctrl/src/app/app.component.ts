@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {Hotkey, HotkeysService} from "angular2-hotkeys";
 
 @Component({
   selector: 'app-root',
@@ -8,19 +9,26 @@ import { Component, OnInit } from '@angular/core';
     
     <router-outlet></router-outlet>
   `,
-  styles: [`
+  styles: [
+    `
     .heading {
       position: relative;
       text-align: center;
-      background-color: #FADD79;
-      color: #242424;
+      color: #FADD79;
+      /*background-color: #242424;*/
       font-family: Fira Mono;
       z-index: 1000;
     }
-  `]
+  `
+  ]
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  constructor(private _hotkeysService: HotkeysService) {
+    this._hotkeysService.add(new Hotkey('meta+shift+g', (event: KeyboardEvent): boolean => {
+      console.log('Typed hotkey');
+      return false; // Prevent bubbling
+    }));
+  }
 
   ngOnInit() {}
 }

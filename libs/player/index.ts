@@ -1,1 +1,1 @@
-export { PlayerModule, playerRoutes } from './src/player.module';
+export { PlayerModule, playerRoutes, IFeed } from './src/player';

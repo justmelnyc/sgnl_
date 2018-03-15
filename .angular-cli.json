@@ -54,7 +54,8 @@
       "testTsconfig": "../../../tsconfig.spec.json",
       "prefix": "app",
       "styles": [
-        "styles.css"
+        "styles.css",
+        "./assets/fonts/videogular.css"
       ],
       "scripts": [],
       "environmentSource": "environments/environment.ts",
@@ -87,6 +88,12 @@
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
+    },
+    {
+      "name": "common-ui",
+      "root": "libs/common-ui/src",
+      "test": "../../../test.js",
+      "appRoot": ""
     },
     {
       "name": "player",

@@ -9,20 +9,21 @@ import { Component, OnInit } from '@angular/core';
     <router-outlet></router-outlet>
 
   `,
-  styles: [`
+  styles: [
+    `
     .heading {
       position: relative;
       text-align: center;
-      background-color: #74FAA2;
-      color: #242424;
+      color: #74FAA2;
+      /*background-color: #242424;*/
       font-family: Fira Mono;
       z-index: 1000;
     }
-  `]
+  `
+  ]
 })
 export class AppComponent implements OnInit {
   constructor() {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 }
