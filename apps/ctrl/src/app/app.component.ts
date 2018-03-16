@@ -5,7 +5,8 @@ import {Hotkey, HotkeysService} from "angular2-hotkeys";
   selector: 'app-root',
   template: `    
     <h2 class="heading">CTRL_</h2>
-    <sig-player></sig-player>
+    <h2 class="heading">Dispatches Commands</h2>
+    <sig-player [video]="'assets/media/nike.mp4'"></sig-player>
     
     <router-outlet></router-outlet>
   `,
@@ -14,7 +15,8 @@ import {Hotkey, HotkeysService} from "angular2-hotkeys";
     .heading {
       position: relative;
       text-align: center;
-      color: #FADD79;
+      /*color: #FADD79;*/
+      color: #74FAA2;
       /*background-color: #242424;*/
       font-family: Fira Mono;
       z-index: 1000;

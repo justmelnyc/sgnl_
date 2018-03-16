@@ -113,3 +113,23 @@ ul {
     }
   }
 }
+vg-scrub-bar {
+  height: 10px;
+  bottom: 0;
+
+}
+vg-scrub-bar-current-time {
+  height: 10px;
+}
+
+vg-scrub-bar-buffering-time {
+  height: 10px;
+}
+
+vg-scrub-bar, vg-scrub-bar-buffering-time, vg-scrub-bar-current-time {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

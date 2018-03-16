@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import { VgAPI, VgStates } from 'videogular2/core';
 import { IPlayable } from 'videogular2/src/core/vg-media/i-playable';
 import { IFeed } from '@sgnl/player';
@@ -26,33 +26,33 @@ import { IFeed } from '@sgnl/player';
         <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
       </vg-scrub-bar>
 
-      <vg-controls>
-        <vg-play-pause></vg-play-pause>
-        <vg-playback-button></vg-playback-button>
+      <!--<vg-controls>-->
+        <!--<vg-play-pause></vg-play-pause>-->
+        <!--<vg-playback-button></vg-playback-button>-->
 
-        <!--<vg-scrub-bar>-->
-          <!--<vg-scrub-bar-current-time></vg-scrub-bar-current-time>-->
-        <!--</vg-scrub-bar>-->
+        <!--&lt;!&ndash;<vg-scrub-bar>&ndash;&gt;-->
+          <!--&lt;!&ndash;<vg-scrub-bar-current-time></vg-scrub-bar-current-time>&ndash;&gt;-->
+        <!--&lt;!&ndash;</vg-scrub-bar>&ndash;&gt;-->
 
-        <!--<div class="cam-selector-container">-->
-          <!--<div class="cam-selected">feed</div>-->
+        <!--&lt;!&ndash;<div class="cam-selector-container">&ndash;&gt;-->
+          <!--&lt;!&ndash;<div class="cam-selected">feed</div>&ndash;&gt;-->
 
-          <!--<select class="camera-selector" [(ngModel)]="selectedCamera.id" (change)="onSelectFeed($event.target.value, selectedCamera.id)">-->
-            <!--<option value="null">Select camera</option>-->
-            <!--<option-->
-              <!--*ngFor="let camera of feeds; let $$index = index;"-->
-              <!--[value]="$$index"-->
-              <!--[selected]="camera.selected === true">-->
-              <!--{{ camera.name }}-->
-            <!--</option>-->
-          <!--</select>-->
-        <!--</div>-->
+          <!--&lt;!&ndash;<select class="camera-selector" [(ngModel)]="selectedCamera.id" (change)="onSelectFeed($event.target.value, selectedCamera.id)">&ndash;&gt;-->
+            <!--&lt;!&ndash;<option value="null">Select camera</option>&ndash;&gt;-->
+            <!--&lt;!&ndash;<option&ndash;&gt;-->
+              <!--&lt;!&ndash;*ngFor="let camera of feeds; let $$index = index;"&ndash;&gt;-->
+              <!--&lt;!&ndash;[value]="$$index"&ndash;&gt;-->
+              <!--&lt;!&ndash;[selected]="camera.selected === true">&ndash;&gt;-->
+              <!--&lt;!&ndash;{{ camera.name }}&ndash;&gt;-->
+            <!--&lt;!&ndash;</option>&ndash;&gt;-->
+          <!--&lt;!&ndash;</select>&ndash;&gt;-->
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
 
-        <vg-mute vgFor="master"></vg-mute>
-        <vg-volume vgFor="master"></vg-volume>
+        <!--<vg-mute vgFor="master"></vg-mute>-->
+        <!--<vg-volume vgFor="master"></vg-volume>-->
 
-        <vg-fullscreen></vg-fullscreen>
-      </vg-controls>
+        <!--<vg-fullscreen></vg-fullscreen>-->
+      <!--</vg-controls>-->
 
       <!--<sig-pip *ngIf="currentFeed.src"-->
               <!--(onCloseCam)="selectedCamera = { id: null }"-->
@@ -63,7 +63,7 @@ import { IFeed } from '@sgnl/player';
              #masterRef
              [vgMedia]="masterRef"
              [vgMaster]="true"
-             [src]="currentFeed.src">
+             [src]=" video || currentFeed.src">
       </video>
     </vg-player>
 
@@ -78,6 +78,8 @@ import { IFeed } from '@sgnl/player';
   styleUrls: ['player.scss']
 })
 export class PlayerComponent implements OnInit {
+  @Input() video;
+
   currentFeed: IFeed;
 
   masterVideo = 'http://assets14.ign.com/videos/zencoder/2015/8/14/640/d9de372f3d373d06d4e770e73af44cb1-500000-1439510486-w.mp4';
@@ -122,7 +124,9 @@ export class PlayerComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.currentFeed = this.feeds[0];
+    // this.currentFeed = this.feeds[0];
+    this.currentFeed = null;
+
   }
 
   onPlayerReady(api: VgAPI) {

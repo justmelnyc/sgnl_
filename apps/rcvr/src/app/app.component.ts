@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-root',
   template: `    
     <h2 class="heading">RCVR_</h2>
+    <h2 class="heading">Receives Commands</h2>
 
     <sig-player></sig-player>
     <router-outlet></router-outlet>
@@ -14,7 +15,8 @@ import { Component, OnInit } from '@angular/core';
     .heading {
       position: relative;
       text-align: center;
-      color: #74FAA2;
+      color: #E83248;
+      /*color: #74FAA2;*/
       /*background-color: #242424;*/
       font-family: Fira Mono;
       z-index: 1000;
