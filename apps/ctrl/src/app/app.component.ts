@@ -16,9 +16,10 @@ import {Hotkey, HotkeysService} from "angular2-hotkeys";
       position: relative;
       text-align: center;
       /*color: #FADD79;*/
-      color: #74FAA2;
       /*background-color: #242424;*/
-      font-family: Fira Mono;
+      color: #74FAA2;
+      font-weight: 100;
+      font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
       z-index: 1000;
     }
   `

@@ -18,7 +18,9 @@ import { Component, OnInit } from '@angular/core';
       color: #E83248;
       /*color: #74FAA2;*/
       /*background-color: #242424;*/
-      font-family: Fira Mono;
+      /*font-family: Fira Mono;*/
+      font-weight: 100;
+      font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
       z-index: 1000;
     }
   `
