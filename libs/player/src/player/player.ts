@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectorRef, OnChanges} from '@angular/core';
+
 import { VgAPI, VgStates } from 'videogular2/core';
 import { IPlayable } from 'videogular2/src/core/vg-media/i-playable';
 import { IFeed } from '@sgnl/player';
@@ -36,33 +37,42 @@ import { IFeed } from '@sgnl/player';
   `,
   styleUrls: ['player.scss']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent implements OnInit, OnChanges {
   @Input() video;
 
   currentFeed: IFeed;
-  api: VgAPI;
+  api: VgAPI = null;
   duration = 0;
   current = 0;
   media: IPlayable;
   state: any;
 
-  constructor() {}
+  constructor(private cd:ChangeDetectorRef) {}
 
   ngOnInit() {
     // this.currentFeed = this.feeds[0];
     this.currentFeed = null;
   }
 
+  ngOnChanges() {
+    console.log( "changes!!!!!" );
+    if (this.api !== null)
+    this.media = this.api.getDefaultMedia();
+    this.cd.detectChanges();
+  }
+
   onPlayerReady(api: VgAPI) {
     console.log('player ready dawg');
+
     this.media = api.getDefaultMedia();
 
     this.api = api;
+    this.setTime(60)
 
-    setTimeout(() => {
-      this.playAfter(api);
-    }, 10000);
-
+    // setTimeout(() => {
+    //   this.playAfter(api);
+    // }, 10000);
+    //
 
     console.log(this.media, this.api);
   }
@@ -84,13 +94,13 @@ export class PlayerComponent implements OnInit {
   //     this.selectedCamera = { id: null } as IFeed;
   //   }
   // }
-  private playAfter(api) {
-    api.play();
-    api.seekTime(60);
-    this.duration = api.duration;
-    this.current = api.currentTime;
-    this.state = api.state;
-  }
+  // private playAfter(api) {
+  //   api.play();
+  //   api.seekTime(60);
+  //   this.duration = api.duration;
+  //   this.current = api.currentTime;
+  //   this.state = api.state;
+  // }
 
 
 

@@ -22,17 +22,27 @@ export interface IFeed {
   selected?: boolean;
 }
 
+
+export function playerComponents() {
+  return [
+    PlayerComponent, SigPipComponent, LoaderComponent
+  ];
+}
+export function playerModules() {
+  return [
+    CommonModule, RouterModule, VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule, FormsModule
+  ];
+}
+
+// export function coreServices(): Provider[] {
+//   return [
+//     VgAPI, VgFullscreenAPI, VgUtils, VgControlsHidden
+//   ];
+// }
+
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule,
-    VgCoreModule,
-    VgControlsModule,
-    VgOverlayPlayModule,
-    VgBufferingModule,
-    FormsModule
-  ],
-  declarations: [PlayerComponent, SigPipComponent, LoaderComponent],
-  exports: [PlayerComponent, SigPipComponent, LoaderComponent]
+  imports: playerModules(),
+  declarations: playerComponents(),
+  exports: playerComponents()
 })
 export class PlayerModule {}
