@@ -15,7 +15,7 @@ vg-player {
     /* Setting width & height to auto prevents the browser from stretching or squishing the video */
     width: auto;
     height: auto;
-
+/**/
     /* Center the video */
     position: absolute;
     top: 50%;
@@ -105,13 +105,13 @@ ul {
   li {
     padding: 10px;
     cursor: pointer;
-    color: #242424;
-    background-color: #FFFFFF;
+    color: #FFFFFF;
+    //background-color: #FFFFFF;
     &.selected {
       background-color: #74FAA2;
     }
     &:hover {
-      background-color: #E83248;
+      background-color: red;
       color: #FFFFFF;
     }
   }

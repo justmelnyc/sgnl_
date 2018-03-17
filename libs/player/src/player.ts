@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 
 import { PlayerComponent } from './player/player';
 import { SigPipComponent } from './sig-pip/sig-pip';
+import {LoaderComponent} from "./loader/loader";
 
 export const playerRoutes: Route[] = [];
 
@@ -31,7 +32,7 @@ export interface IFeed {
     VgBufferingModule,
     FormsModule
   ],
-  declarations: [PlayerComponent, SigPipComponent],
-  exports: [PlayerComponent, SigPipComponent]
+  declarations: [PlayerComponent, SigPipComponent, LoaderComponent],
+  exports: [PlayerComponent, SigPipComponent, LoaderComponent]
 })
 export class PlayerModule {}

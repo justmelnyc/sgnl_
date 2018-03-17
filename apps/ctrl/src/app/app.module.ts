@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NxModule } from '@nrwl/nx';
 import { RouterModule } from '@angular/router';
 import { PlayerModule } from '@sgnl/player';
-import {HotkeyModule, HotkeysService} from "angular2-hotkeys";
+import { HotkeyModule, HotkeysService } from 'angular2-hotkeys';
 
 @NgModule({
   imports: [

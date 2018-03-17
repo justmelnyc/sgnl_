@@ -102,6 +102,12 @@
       "appRoot": ""
     },
     {
+      "name": "signal",
+      "root": "libs/signal/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "$workspaceRoot",
       "root": ".",
       "appRoot": ""
