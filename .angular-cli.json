@@ -62,7 +62,8 @@
       "environments": {
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
-      }
+      },
+      "showCircularDependencies": false
     },
     {
       "name": "rcvr",
@@ -96,6 +97,12 @@
       "appRoot": ""
     },
     {
+      "name": "fire",
+      "root": "libs/fire/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "player",
       "root": "libs/player/src",
       "test": "../../../test.js",
@@ -104,6 +111,12 @@
     {
       "name": "signal",
       "root": "libs/signal/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
+      "name": "utils",
+      "root": "libs/utils/src",
       "test": "../../../test.js",
       "appRoot": ""
     },

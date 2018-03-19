@@ -10,7 +10,10 @@ import { FormsModule } from '@angular/forms';
 
 import { PlayerComponent } from './player/player';
 import { SigPipComponent } from './sig-pip/sig-pip';
-import {LoaderComponent} from "./loader/loader";
+import { LoaderComponent } from './components/loader';
+import {TimecodePipe} from './pipes/timecode'
+import {BufferComponent} from './components/buffer'
+
 
 export const playerRoutes: Route[] = [];
 
@@ -22,15 +25,18 @@ export interface IFeed {
   selected?: boolean;
 }
 
-
 export function playerComponents() {
-  return [
-    PlayerComponent, SigPipComponent, LoaderComponent
-  ];
+  return [PlayerComponent, SigPipComponent, LoaderComponent, TimecodePipe, BufferComponent];
 }
 export function playerModules() {
   return [
-    CommonModule, RouterModule, VgCoreModule, VgControlsModule, VgOverlayPlayModule, VgBufferingModule, FormsModule
+    CommonModule,
+    RouterModule,
+    VgCoreModule,
+    VgControlsModule,
+    VgOverlayPlayModule,
+    VgBufferingModule,
+    FormsModule,
   ];
 }
 

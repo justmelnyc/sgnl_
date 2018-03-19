@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ChangeDetectorRef, OnChanges} from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, OnChanges } from '@angular/core';
 
 import { VgAPI, VgStates } from 'videogular2/core';
 import { IPlayable } from 'videogular2/src/core/vg-media/i-playable';
@@ -11,11 +11,20 @@ import { IFeed } from '@sgnl/player';
     <vg-player class="player" (onPlayerReady)="onPlayerReady($event)">
       <vg-overlay-play></vg-overlay-play>
       <vg-buffering></vg-buffering>
+      <!--<sig-buffer></sig-buffer>-->
 
-      <vg-scrub-bar>
+
+      <vg-scrub-bar >
         <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
       </vg-scrub-bar>
+
+      <!--<vg-controls [vgAutohide]="true"-->
+                   <!--[vgAutohideTime]="3">-->
+        <!--<vg-scrub-bar>-->
+          <!--<vg-scrub-bar-current-time></vg-scrub-bar-current-time>-->
+        <!--</vg-scrub-bar>-->
+        <!---->
+      <!--</vg-controls>-->
 
       <video id="master"
              #masterRef
@@ -25,15 +34,24 @@ import { IFeed } from '@sgnl/player';
       </video>
     </vg-player>
 
-    <ul>
-      <li>{{ api.time | json }}</li>
-      <li (click)="setTime(20)">set to 00:20</li>
-      <li *ngIf="media?.state === 'paused'" (click)="api.play()">play</li>
-      <li *ngIf="media?.state === 'playing'" (click)="api.pause()">pause</li>
 
-      <li>{{ media?.currentTime }} / {{ media?.duration}}</li>
-      <li>{{ media?.state }}</li>
-    </ul>
+
+
+    <code>
+      <ul>
+        <li>{{ api.time.current | timecode: 'mm:ss' }} — {{ api.time.left | timecode: 'mm:ss' }} — {{ api.time.total | timecode: 'mm:ss' }}</li>
+        <li (click)="setTime(20)">set to 00:20</li>
+        <!--<li *ngIf="media?.state === 'paused'" (click)="api.play()">play</li>-->
+        <!--<li *ngIf="media?.state === 'playing'" (click)="api.pause()">pause</li>-->
+
+        <li (click)="media?.state === 'paused' ? api.play() : api.pause() ">{{ media?.state === 'paused' ? 'play' : 'pause' }}</li>
+
+
+        <li>{{ media?.currentTime }} / {{ media?.duration}}</li>
+        <li>{{ media?.state }}</li>
+      </ul>
+    </code>
+
   `,
   styleUrls: ['player.scss']
 })
@@ -47,7 +65,7 @@ export class PlayerComponent implements OnInit, OnChanges {
   media: IPlayable;
   state: any;
 
-  constructor(private cd:ChangeDetectorRef) {}
+  constructor(private cd: ChangeDetectorRef) {}
 
   ngOnInit() {
     // this.currentFeed = this.feeds[0];
@@ -55,9 +73,8 @@ export class PlayerComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    console.log( "changes!!!!!" );
-    if (this.api !== null)
-    this.media = this.api.getDefaultMedia();
+    console.log('changes!!!!!');
+    if (this.api !== null) this.media = this.api.getDefaultMedia();
     this.cd.detectChanges();
   }
 
@@ -67,7 +84,7 @@ export class PlayerComponent implements OnInit, OnChanges {
     this.media = api.getDefaultMedia();
 
     this.api = api;
-    this.setTime(60)
+    this.setTime(60);
 
     // setTimeout(() => {
     //   this.playAfter(api);
@@ -101,7 +118,4 @@ export class PlayerComponent implements OnInit, OnChanges {
   //   this.current = api.currentTime;
   //   this.state = api.state;
   // }
-
-
-
 }

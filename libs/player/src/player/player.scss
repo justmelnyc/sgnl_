@@ -136,3 +136,61 @@ vg-scrub-bar, vg-scrub-bar-buffering-time, vg-scrub-bar-current-time {
   -ms-user-select: none;
   user-select: none;
 }
+
+
+vg-controls {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  height: 10px;
+  z-index: 300;
+  bottom: 0;
+  background-color: white;
+  -webkit-transition: bottom 1s;
+  -khtml-transition: bottom 1s;
+  -moz-transition: bottom 1s;
+  -ms-transition: bottom 1s;
+  transition: bottom 1s;
+}
+vg-controls.hide {
+  bottom: -10px;
+}
+
+
+vg-scrub-bar-current-time {
+  display: flex;
+  width: 100%;
+  height: 5px;
+  pointer-events: none;
+  position: absolute;
+}
+//vg-scrub-bar-current-time .background {
+//  background-color: white;
+//}
+vg-controls vg-scrub-bar-current-time {
+  position: absolute;
+  top: 0;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+vg-controls vg-scrub-bar-current-time .background {
+  border: 1px solid green;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+
+vg-scrub-bar-current-time .slider{
+  background: white;
+  height: 10px;
+  width: 15px;
+  //border-radius: 50%;
+  //box-shadow: 0px 0px 10px black;
+  margin: 0;
+  //margin-left: -10px;
+}
+
+vg-scrub-bar-current-time .background {
+  background: black;
+}
