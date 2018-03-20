@@ -1,8 +1,8 @@
 import { Component, ElementRef, HostBinding, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 
 import { Subscription } from 'rxjs/Subscription';
-import {VgAPI} from 'videogular2/core'
-import {IPlayable} from 'videogular2/src/core/vg-media/i-playable'
+import { VgAPI } from 'videogular2/core';
+import { IPlayable } from 'videogular2/src/core/vg-media/i-playable';
 
 @Component({
   selector: 'sig-buffer',
@@ -13,7 +13,8 @@ import {IPlayable} from 'videogular2/src/core/vg-media/i-playable'
                 <sig-loader></sig-loader>
             </div>
         </div>`,
-  styles: [ `
+  styles: [
+    `
         vg-buffering {
             display: none;
             z-index: 201;
@@ -91,7 +92,8 @@ import {IPlayable} from 'videogular2/src/core/vg-media/i-playable'
                 /*-webkit-transform: rotate(-360deg);*/
             /*}*/
         /*}*/
-    ` ]
+    `
+  ]
 })
 export class BufferComponent implements OnInit, OnDestroy {
   @Input() vgFor: string;
@@ -113,11 +115,8 @@ export class BufferComponent implements OnInit, OnDestroy {
   ngOnInit() {
     if (this.API.isPlayerReady) {
       this.onPlayerReady();
-    }
-    else {
-      this.subscriptions.push(
-        this.API.playerReadyEvent.subscribe(() => this.onPlayerReady())
-      );
+    } else {
+      this.subscriptions.push(this.API.playerReadyEvent.subscribe(() => this.onPlayerReady()));
     }
   }
 
@@ -125,9 +124,7 @@ export class BufferComponent implements OnInit, OnDestroy {
     this.target = this.API.getMediaById(this.vgFor);
 
     this.subscriptions.push(
-      this.target.subscriptions.bufferDetected.subscribe(
-        isBuffering => this.onUpdateBuffer(isBuffering)
-      )
+      this.target.subscriptions.bufferDetected.subscribe(isBuffering => this.onUpdateBuffer(isBuffering))
     );
   }
 

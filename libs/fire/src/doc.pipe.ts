@@ -6,11 +6,9 @@ import { Observable } from 'rxjs/Observable';
   name: 'doc'
 })
 export class DocPipe implements PipeTransform {
-
   constructor(private db: FirestoreService) {}
 
   transform(value: any): Observable<any> {
-    return this.db.doc$(value.path)
+    return this.db.doc$(value.path);
   }
-
 }

@@ -1,18 +1,16 @@
-import {NgModule, Provider} from '@angular/core'
+import { NgModule, Provider } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DocPipe } from './doc.pipe';
-import {FirestoreService} from '@sgnl/fire'
-import {AngularFirestore} from 'angularfire2/firestore'
+import { FirestoreService } from './firestore.service';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 export function coreServices(): Provider[] {
   return [FirestoreService, AngularFirestore];
 }
 
-
 @NgModule({
   imports: [CommonModule],
   declarations: [DocPipe],
   providers: coreServices()
-
 })
 export class FireModule {}

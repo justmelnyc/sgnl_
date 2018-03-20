@@ -11,9 +11,8 @@ import { FormsModule } from '@angular/forms';
 import { PlayerComponent } from './player/player';
 import { SigPipComponent } from './sig-pip/sig-pip';
 import { LoaderComponent } from './components/loader';
-import {TimecodePipe} from './pipes/timecode'
-import {BufferComponent} from './components/buffer'
-
+import { TimecodePipe } from './pipes/timecode';
+import { BufferComponent } from './components/buffer'
 
 export const playerRoutes: Route[] = [];
 
@@ -36,7 +35,7 @@ export function playerModules() {
     VgControlsModule,
     VgOverlayPlayModule,
     VgBufferingModule,
-    FormsModule,
+    FormsModule
   ];
 }
 

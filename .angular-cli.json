@@ -91,6 +91,12 @@
       }
     },
     {
+      "name": "auth",
+      "root": "libs/auth/src",
+      "test": "../../../test.js",
+      "appRoot": ""
+    },
+    {
       "name": "common-ui",
       "root": "libs/common-ui/src",
       "test": "../../../test.js",

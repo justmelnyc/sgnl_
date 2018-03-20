@@ -6,11 +6,13 @@ import { Observable } from 'rxjs/Observable';
 
 import { SigStates } from '@sgnl/signal';
 import { VgAPI } from 'videogular2/core';
+import {BehaviorSubject} from 'rxjs/BehaviorSubject'
 
 export interface Status {
   account_id: any;
   installation_id: any;
-  state: number;
+  currentTime?: number
+  state: string;
 }
 
 @Injectable()
@@ -19,37 +21,56 @@ export class Signal {
   medias: Object = {};
   playerReadyEvent: EventEmitter<any> = new EventEmitter(true);
 
-  constructor(private afs: AngularFirestore, private vid: VgAPI) {}
+  currentTime = new BehaviorSubject(0);
 
+  private statusSource = new BehaviorSubject<Status>({account_id: 'prism_account_001',
+  installation_id: 'installation_id', state: 'paused', currentTime: 0});
 
+  status$ = this.statusSource.asObservable();
+
+  constructor(private afs: AngularFirestore, private video: VgAPI) {}
 
   // status methods
 
-  // Status reviews that belong to a user
+  // Status that belong to an account
   getAccountStatus(account_id) {
-    const starsRef = this.afs.collection('status', ref => ref.where('account_id', '==', account_id) );
-    return starsRef.valueChanges();
+    const statusRef = this.afs.collection('status', ref => ref.where('account_id', '==', account_id));
+    return statusRef.valueChanges();
   }
 
-  // Get all stars that belongs to a Movie
+  // Get all statuses that belongs to a Movie
 
   getInstallationStatus(installation_id) {
-    const starsRef = this.afs.collection('status', ref => ref.where('installation_id', '==', 'installation_id') );
-    console.log('starsRef : '+ starsRef.ref, 'installation_id : ' + installation_id)
-    return starsRef.valueChanges();
+    const statusRef = this.afs.collection('status', ref => ref.where('installation_id', '==', 'installation_id'));
+    console.log('statusRef : ' + statusRef.ref, 'installation_id : ' + installation_id);
+    return statusRef.valueChanges();
   }
 
-  // Create or update star
-  setStatus(account_id, installation_id, state) {
+  // Create or update status
+  setStatus(status) {
     // Status document data
-    const star: Status = { account_id, installation_id, state };
+    // const status: Status = { account_id, installation_id, state };
 
     // Custom doc ID for relationship
-    const starPath = `status/${star.account_id}_${star.installation_id}`;
+
+    this.statusSource.next(status);
+    const statusPath = `status/${status.account_id}_${status.installation_id}`;
 
     // Set the data, return the promise
-    return this.afs.doc(starPath).set(star)
+    return this.afs.doc(statusPath).set(status);
   }
+
+  // old status method
+  // setStatus(account_id, installation_id, state) {
+  //   // Status document data
+  //   const status: Status = { account_id, installation_id, state };
+  //
+  //   // Custom doc ID for relationship
+  //   const statusPath = `status/${status.account_id}_${status.installation_id}`;
+  //
+  //   // Set the data, return the promise
+  //   return this.afs.doc(statusPath).set(status);
+  // }
 
   onPlayerReady() {
     this.isPlayerReady = true;

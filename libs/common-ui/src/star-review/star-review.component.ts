@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core'
-import { Observable } from 'rxjs/Observable'
-import {Signal} from '@sgnl/signal'
-
+import { Component, OnInit, Input } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import { Signal } from '@sgnl/signal';
 
 @Component({
   selector: 'star-review',
@@ -39,20 +38,18 @@ import {Signal} from '@sgnl/signal'
   styleUrls: ['./star-review.component.scss']
 })
 export class StarReviewComponent implements OnInit {
+  @Input() account;
+  @Input() installation;
 
-
-  @Input() account
-  @Input() installation
-
-  stars: Observable<any>
+  stars: Observable<any>;
   // avgRating: Observable<any>
   // status: any
 
-  constructor(private signal: Signal) { }
+  constructor(private signal: Signal) {}
 
   ngOnInit() {
-    this.stars = this.signal.getAccountStatus('account_id')
-    console.log(this.installation, this.account, this.stars)
+    this.stars = this.signal.getAccountStatus('prism_account_001');
+    console.log(this.installation, this.account, this.stars);
 
     // this.status = this.signal.getInstallationStatus(this.installation);
 
@@ -63,8 +60,6 @@ export class StarReviewComponent implements OnInit {
   }
 
   async starHandler(value) {
-    await this.signal.setStatus(this.account, this.installation, value)
+    await this.signal.setStatus(value);
   }
-
-
 }

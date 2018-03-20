@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter} from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter } from '@angular/core';
 
 import { VgAPI, VgStates } from 'videogular2/core';
 import { IPlayable } from 'videogular2/src/core/vg-media/i-playable';
@@ -44,7 +44,7 @@ import { IFeed } from '@sgnl/player';
         <!--<li *ngIf="media?.state === 'paused'" (click)="api.play()">play</li>-->
         <!--<li *ngIf="media?.state === 'playing'" (click)="api.pause()">pause</li>-->
 
-        <li (click)="media?.state === 'paused' ? api.play() : api.pause() ">{{ media?.state === 'paused' ? 'play' : 'pause' }}</li>
+        <!--<li (click)="media?.state === 'paused' ? api.play() : api.pause() ">{{ media?.state === 'paused' ? 'play' : 'pause' }}</li>-->
 
 
         <li>{{ media?.currentTime }} / {{ media?.duration}}</li>
@@ -60,11 +60,11 @@ export class PlayerComponent implements OnInit, OnChanges {
 
   @Input() video;
 
-  @Input() autoPlay:boolean = false;
+  @Input() autoPlay: boolean = false;
 
   @Input()
   set playResource(_resource: string) {
-    this.changeResource(_resource, 'video/mp4')
+    this.changeResource(_resource, 'video/mp4');
   }
 
   @Output() playerReady = new EventEmitter();
@@ -142,15 +142,11 @@ export class PlayerComponent implements OnInit, OnChanges {
     });
     setTimeout(() => {
       this.api.getDefaultMedia().currentTime = 0;
-      if (this.api && this.autoPlay)
-        this.api.play();
-    }, 300)
-
+      if (this.api && this.autoPlay) this.api.play();
+    }, 300);
   }
 
   getApi(): VgAPI {
     return this.api;
   }
-
-
 }
