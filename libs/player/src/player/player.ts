@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectorRef, OnChanges } from '@angular/core';
+import {Component, Input, OnInit, ChangeDetectorRef, OnChanges, Output, EventEmitter} from '@angular/core';
 
 import { VgAPI, VgStates } from 'videogular2/core';
 import { IPlayable } from 'videogular2/src/core/vg-media/i-playable';
@@ -56,7 +56,18 @@ import { IFeed } from '@sgnl/player';
   styleUrls: ['player.scss']
 })
 export class PlayerComponent implements OnInit, OnChanges {
+  sources: Array<any>;
+
   @Input() video;
+
+  @Input() autoPlay:boolean = false;
+
+  @Input()
+  set playResource(_resource: string) {
+    this.changeResource(_resource, 'video/mp4')
+  }
+
+  @Output() playerReady = new EventEmitter();
 
   currentFeed: IFeed;
   api: VgAPI = null;
@@ -79,12 +90,15 @@ export class PlayerComponent implements OnInit, OnChanges {
   }
 
   onPlayerReady(api: VgAPI) {
-    console.log('player ready dawg');
+    console.log('player ready!!!');
 
     this.media = api.getDefaultMedia();
 
     this.api = api;
+
     this.setTime(60);
+
+    this.playerReady.emit(api);
 
     // setTimeout(() => {
     //   this.playAfter(api);
@@ -101,7 +115,7 @@ export class PlayerComponent implements OnInit, OnChanges {
   // onSelectFeed($event: any, index) {
   //   // $event.target.dispatchEvent(new CustomEvent('vgStartAnimation'));
   //   this.currentFeed = this.feeds[index];
-  //   console.log('feed', this.currentFeed, index);
+  //   console.getVideoApi('feed', this.currentFeed, index);
   // }
 
   // onSelectCamera(index: number) {
@@ -118,4 +132,25 @@ export class PlayerComponent implements OnInit, OnChanges {
   //   this.current = api.currentTime;
   //   this.state = api.state;
   // }
+
+  changeResource(source: string, type: string) {
+    if (this.api) this.api.pause();
+    this.sources = new Array<Object>();
+    this.sources.push({
+      src: source,
+      type: type
+    });
+    setTimeout(() => {
+      this.api.getDefaultMedia().currentTime = 0;
+      if (this.api && this.autoPlay)
+        this.api.play();
+    }, 300)
+
+  }
+
+  getApi(): VgAPI {
+    return this.api;
+  }
+
+
 }

@@ -1,16 +1,18 @@
 import { Component, OnInit, ChangeDetectorRef, OnChanges  } from '@angular/core';
 import { Hotkey, HotkeysService } from 'angular2-hotkeys';
-import {FirestoreService} from '@sgnl/fire'
-import {AngularFireDatabase} from 'angularfire2/database'
 import {AngularFirestore, AngularFirestoreDocument} from 'angularfire2/firestore'
-import {Signal, Status} from '@sgnl/signal'
 import {Observable} from 'rxjs/Observable'
+import {VgAPI} from "videogular2/core";
+
+import {Signal, Status} from '@sgnl/signal'
+import {timeInterval} from 'rxjs/operator/timeInterval'
+
 
 @Component({
   selector: 'app-root',
-  template: `    
+  template: `
     <h2 class="heading">CTRL_</h2>
-    <h2 class="heading">status : {{  (status | async)?.state}}</h2>
+    <h2 class="heading">status : {{ (status | async)?.state}}</h2>
 
     <h2 class="heading">Dispatches Commands</h2>
 
@@ -18,9 +20,9 @@ import {Observable} from 'rxjs/Observable'
       [account]="'prism_account_001'"
       [installation]="'installation_id'">
     </star-review>
-    
-    <sig-player [video]="'assets/media/nike.mp4'"></sig-player>
-    
+
+    <sig-player [video]="'assets/media/nike.mp4'" (playerReady)="getVideoApi($event)"></sig-player>
+
     <router-outlet></router-outlet>
   `,
   styles: [
@@ -60,13 +62,22 @@ export class AppComponent implements OnInit, OnChanges {
     );
   }
 
+  getVideoApi(api: VgAPI) {
+    // console.log('ready CTRL_ :', api)
+    setTimeout(() => {
+      api.play();
+    }, 10000);
+
+  }
+
   ngOnInit() {
-    // this.status = this.fire.doc(this.statusRef)
-    // console.log('status',this.status)
+
   }
 
   ngOnChanges() {
     console.log('changes!!!!!');
 
   }
+
+
 }

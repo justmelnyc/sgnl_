@@ -63,6 +63,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     // this.status = this.fire.doc(this.statusRef)
-    // console.log('status',this.status)
+    // console.getVideoApi('status',this.status)
   }
 }
