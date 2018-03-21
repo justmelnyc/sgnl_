@@ -83,6 +83,11 @@
       "styles": [
         "styles.css"
       ],
+      "stylePreprocessorOptions": {
+        "includePaths": [
+          "styles/theme"
+        ]
+      },
       "scripts": [],
       "environmentSource": "environments/environment.ts",
       "environments": {

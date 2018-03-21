@@ -21,69 +21,14 @@ import {AuthService} from "@sgnl/auth";
       [installation]="'installation_id'">
     </star-review>
     <sig-player [video]="'assets/media/nike.mp4'" (playerReady)="getVideoApi($event)"></sig-player>
-    <button class="set" (click)="setTime(60); sendStatusSignal()">set to 60</button>
-    <button class="set2" (click)="setTime(80); sendStatusSignal()">set to 80</button>
+    <button class="set" (click)="setTime(40); sendStatusSignal()">set to 40</button>
+    <button class="set2" (click)="setTime(60); sendStatusSignal()">set to 60</button>
+    <button class="set3" (click)="setTime(80); sendStatusSignal()">set to 80</button>
 
-    <button class="play" (click)="media?.state === 'paused' ? api.play() : api.pause() ">{{ media?.state === 'paused' ? 'play' : 'pause' }}</button>
+
+    <button class="play" (click)="media?.state === 'paused' ? sendStatusSignal() : api.pause() ">{{ media?.state === 'paused' ? 'play' : 'pause' }}</button>
   `,
-  styles: [
-
-    `
-      .heading, .play, .set, .set2 {
-        font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
-        z-index: 1000;
-        
-      }
-      .heading {
-      position: relative;
-      text-align: center;
-      /*color: #FADD79;*/
-      /*background-color: #242424;*/
-      color: #74FAA2;
-      font-weight: 100;
-      
-    }
-    .play, .set, .set2 {
-      position: absolute;
-      right: 0;
-      padding: 1rem;
-      color: #242424;
-      background: #FFFFFF;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: light;
-      border-radius: 5px;
-      margin: 10px;
-    }
-    .play {
-      top: 300px;
-    }
-    .set {
-      top: 100px;
-    }
-    .set2 {
-      top: 200px;
-    }
-    .play:hover, .set:hover {
-      background-color: #74FAA2;
-      color: #FFFFFF;
-      border: none;
-    }
-    button, input[type="submit"], input[type="reset"] {
-      background: none;
-      color: inherit;
-      border: none;
-      padding: 0;
-      font: inherit;
-      cursor: pointer;
-      outline: inherit;
-    }
-    ::selection {
-      color: #242424;
-      background: #FFFFFF; /* WebKit/Blink Browsers */
-    }
-  `
-  ]
+  styleUrls: ['ctrl-player.scss']
 })
 export class PlayerComponent implements OnInit, OnChanges {
   api: VgAPI;
@@ -112,6 +57,8 @@ export class PlayerComponent implements OnInit, OnChanges {
       })
     );
   }
+
+
 
   getVideoApi(api: VgAPI) {
     // console.log('ready CTRL_ :', api)

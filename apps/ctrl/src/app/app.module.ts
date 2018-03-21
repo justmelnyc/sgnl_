@@ -16,7 +16,7 @@ import { RoutingModule } from './app.routing';
 
 import { HotkeyModule, HotkeysService } from 'angular2-hotkeys';
 import {AuthModule, AuthService} from "@sgnl/auth";
-import {PlayerComponent} from "./player/player";
+import {PlayerComponent} from "./player/ctrl-player";
 import {LoginComponent} from "./login/login";
 import {AngularFireAuth} from "angularfire2/auth";
 

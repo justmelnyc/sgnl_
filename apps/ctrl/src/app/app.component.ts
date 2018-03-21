@@ -14,39 +14,7 @@ import {AuthService} from "@sgnl/auth";
     <button class="logout" (click)="signOut()">logout</button>
     <router-outlet></router-outlet>
   `,
-  styles: [
-    `
-      .logout {
-        position: absolute;
-        top: 0;
-        right: 0;
-        padding: 1rem;
-        color: #242424;
-        background: #FFFFFF;
-        cursor: pointer;
-        z-index: 100000;
-        text-decoration: none;
-        font-weight: light;
-        border-radius: 5px;
-        margin: 10px;
-        font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
-      }
-      .logout:hover {
-        background-color: #74FAA2;
-        color: #FFFFFF;
-        border: none;
-      }
-      button, input[type="submit"], input[type="reset"] {
-        background: none;
-        color: inherit;
-        border: none;
-        padding: 0;
-        font: inherit;
-        cursor: pointer;
-        outline: inherit;
-      }
-    `
-  ]
+  styles: [``]
 })
 export class AppComponent implements OnInit {
   api: VgAPI;

@@ -1,9 +1,10 @@
 import { Routes, RouterModule } from '@angular/router'
 import { ModuleWithProviders } from '@angular/core'
 // import { AdminComponent } from './admin/admin.component'
-import { PlayerComponent } from './player/ctrl-player'
-import {AuthGuard} from "@sgnl/auth";
-import {LoginComponent} from "./login/login";
+import { PlayerComponent } from './player/rcvr-player'
+import {AuthGuard} from '@sgnl/auth';
+import {LoginComponent} from './login/login'
+
 
 export const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },

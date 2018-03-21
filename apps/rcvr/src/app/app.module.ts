@@ -11,10 +11,16 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFireModule, FirebaseApp } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { HotkeyModule, HotkeysService } from 'angular2-hotkeys';
+import {PlayerComponent} from './player/rcvr-player'
+import {RoutingModule} from './app.routing'
+import {AuthModule, AuthService} from '@sgnl/auth'
+import {LoginComponent} from './login/login'
+import {AngularFireAuth} from 'angularfire2/auth'
 
 export function coreServices(): Provider[] {
-  return [Signal, FirestoreService, AngularFireModule, AngularFirestore, HotkeysService];
+  return [Signal, FirestoreService, AngularFireModule, AngularFireAuth, AngularFirestore, HotkeysService, AuthService];
 }
+
 
 @NgModule({
   imports: [
@@ -24,9 +30,11 @@ export function coreServices(): Provider[] {
     NxModule.forRoot(),
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot([], { initialNavigation: 'enabled' }),
+    RoutingModule,
+    AuthModule,
     HotkeyModule.forRoot()
   ],
-  declarations: [AppComponent],
+  declarations: [AppComponent, PlayerComponent, LoginComponent],
   bootstrap: [AppComponent],
   providers: coreServices()
 })
