@@ -105,7 +105,7 @@ export class PlayerComponent implements OnInit, OnChanges {
     // }, 10000);
     //
 
-    console.log(this.media, this.api);
+    // console.log(this.media, this.api);
   }
 
   setTime(time) {

@@ -23,10 +23,17 @@ export class Signal {
 
   currentTime = new BehaviorSubject(0);
 
-  private statusSource = new BehaviorSubject<Status>({account_id: 'prism_account_001',
-  installation_id: 'installation_id', state: 'paused', currentTime: 0});
 
-  status$ = this.statusSource.asObservable();
+  initialStatus = {
+    account_id: 'prism_account_001',
+    installation_id: 'installation_id',
+    state: 'paused',
+    currentTime: 0
+  }
+
+  private statusSource = new BehaviorSubject<Status>(this.initialStatus);
+
+  public status$: Observable<Status> = this.statusSource.asObservable();
 
   constructor(private afs: AngularFirestore, private video: VgAPI) {}
 

@@ -11,9 +11,9 @@ import {VgAPI} from 'videogular2/core'
   selector: 'app-root',
   template: `
     <h2 class="heading">RCVR_</h2>
-    <h2 class="heading">status : {{  (status | async)?.state}}</h2>
+    <h2 class="heading">status : {{  (status$ | async)?.state}}</h2>
 
-    <h2 class="heading">Receives Commands {{ status | async | json }}</h2>
+    <h2 class="heading">Receives Commands {{ status$ | async | json }}</h2>
 
     <button class="set" (click)="setTime()">set to 80</button>
 
@@ -71,10 +71,11 @@ export class AppComponent implements OnInit, OnChanges {
   media;
 
   statusRef = '/status/prism_account_001_installation_id';
-  status: Observable<Status>;
+  status$: Observable<Status>;
   constructor(private signal: Signal, private _hotkeysService: HotkeysService, private afs: AngularFirestore) {
     this.statusDoc = afs.doc<Status>(this.statusRef);
-    this.status = this.statusDoc.valueChanges();
+    this.status$ = this.statusDoc.valueChanges();
+
 
     this._hotkeysService.add(
       new Hotkey('meta+shift+g', (event: KeyboardEvent): boolean => {
@@ -92,7 +93,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges() {
-    this.status.subscribe(status => {
+    this.status$.subscribe(status => {
       if (this.api) {
         this.api.currentTime(status);
       }
@@ -103,11 +104,24 @@ export class AppComponent implements OnInit, OnChanges {
   ngOnInit() {
 
 
+
+    // this.status$
+
+
     // this.status = this.fire.doc(this.statusRef)
     // console.getVideoApi('status',this.status)
+
+
+    const change = this.status$.subscribe((status: Status) => {
+      const time = status.currentTime;
+        this.api.seekTime(time);
+    })
   }
 
   getVideoApi(api: VgAPI) {
+
+
+
 
     this.api = api;
     //api.currentTime(this.status.state)
