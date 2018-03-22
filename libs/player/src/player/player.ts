@@ -6,14 +6,12 @@ import { IFeed } from '@sgnl/player';
 
 @Component({
   selector: 'sig-player',
-  template: `
-    
+  template: `    
     <vg-player class="player" (onPlayerReady)="onPlayerReady($event)">
       <vg-overlay-play></vg-overlay-play>
       <vg-buffering></vg-buffering>
       <!--<sig-buffer></sig-buffer>-->
-
-
+      
       <vg-scrub-bar >
         <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
       </vg-scrub-bar>
@@ -27,16 +25,14 @@ import { IFeed } from '@sgnl/player';
       <!--</vg-controls>-->
 
       <video id="master"
+             muted
              #masterRef
              [vgMedia]="masterRef"
              [vgMaster]="true"
              [src]="video">
       </video>
     </vg-player>
-
-
-
-
+    
     <code>
       <ul>
         <li>{{ api.time.current | timecode: 'mm:ss' }} — {{ api.time.left | timecode: 'mm:ss' }} — {{ api.time.total | timecode: 'mm:ss' }}</li>
@@ -45,13 +41,11 @@ import { IFeed } from '@sgnl/player';
         <!--<li *ngIf="media?.state === 'playing'" (click)="api.pause()">pause</li>-->
 
         <!--<li (click)="media?.state === 'paused' ? api.play() : api.pause() ">{{ media?.state === 'paused' ? 'play' : 'pause' }}</li>-->
-
-
+        
         <li>{{ media?.currentTime }} / {{ media?.duration}}</li>
         <li>{{ media?.state }}</li>
       </ul>
     </code>
-
   `,
   styleUrls: ['player.scss']
 })

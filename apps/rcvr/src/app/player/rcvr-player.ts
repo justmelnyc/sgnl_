@@ -24,12 +24,14 @@ import {VgAPI} from 'videogular2/core'
 
     <sig-player
       (playerReady)="getVideoApi($event)"
-      [video]="'assets/media/sure.mp4'"></sig-player>
+      [video]="'assets/media/r.mp4'">
+      
+    </sig-player>
     <router-outlet></router-outlet>
   `,
   styleUrls: ['rcvr-player.scss']
 })
-export class PlayerComponent implements OnInit, OnChanges {
+export class PlayerComponent implements OnInit {
   private statusDoc: AngularFirestoreDocument<Status>;
   state;
   api: VgAPI;
@@ -48,35 +50,31 @@ export class PlayerComponent implements OnInit, OnChanges {
         return false; // Prevent bubbling
       })
     );
-    this.state = this.signal.status$
-      .subscribe(status => {
-        if(this.api) {
-          this.setTime(status.currentTime)
-
-        }
-      });
-  }
-
-  ngOnChanges() {
-    this.status$.subscribe(status => {
-      if (this.api) {
-        this.api.currentTime(status);
-      }
-      console.log('status: ', status)
-    })
   }
 
   ngOnInit() {
-    // this.status$
 
-    // this.status = this.fire.doc(this.statusRef)
-    // console.getVideoApi('status',this.status)
+
+    // ${account_id}/${installation_id}/${node_id}/${status}
 
     const change = this.status$.subscribe((status: Status) => {
       const time = status.currentTime;
-      this.api.seekTime(time);
+      const state = status.state
+      this.api.seekTime(time)
+
+      if (state === 'playing') {
+        setInterval( () => {
+
+          if(new Date().getSeconds() === 30) {
+            console.log('sync')
+            this.api.play()
+          }
+        }, 10)
+
+      }
     })
   }
+
 
   getVideoApi(api: VgAPI) {
     this.api = api;

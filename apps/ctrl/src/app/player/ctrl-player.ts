@@ -20,8 +20,11 @@ import {AuthService} from "@sgnl/auth";
       [account]="'prism_account_001'"
       [installation]="'installation_id'">
     </star-review>
-    <sig-player [video]="'assets/media/nike.mp4'" (playerReady)="getVideoApi($event)"></sig-player>
-    <button class="set" (click)="setTime(40); sendStatusSignal()">set to 40</button>
+    <sig-player [video]="'assets/media/l.mp4'" (playerReady)="getVideoApi($event)"></sig-player>
+    <button class="set set4" (click)="setTime(0); sendStatusSignal()">reset</button>
+
+    <!--<button class="set" (click)="setTime(40); sendStatusSignal()">set to 40</button>-->
+    <button class="set" (click)="sendStatusSignal()">play</button>
     <button class="set2" (click)="setTime(60); sendStatusSignal()">set to 60</button>
     <button class="set3" (click)="setTime(80); sendStatusSignal()">set to 80</button>
 
@@ -39,6 +42,8 @@ export class PlayerComponent implements OnInit, OnChanges {
   statusRef = '/status/prism_account_001_installation_id';
   status: Observable<Status>;
   media: IPlayable;
+  status$: Observable<Status>;
+
   constructor(
     private cd: ChangeDetectorRef,
     private _hotkeysService: HotkeysService,
@@ -48,6 +53,7 @@ export class PlayerComponent implements OnInit, OnChanges {
   ) {
     this.statusDoc = afs.doc<Status>(this.statusRef);
     this.status = this.statusDoc.valueChanges();
+    this.status$ = this.statusDoc.valueChanges()
 
     this._hotkeysService.add(
       new Hotkey('meta+shift+f', (event: KeyboardEvent): boolean => {
@@ -57,8 +63,6 @@ export class PlayerComponent implements OnInit, OnChanges {
       })
     );
   }
-
-
 
   getVideoApi(api: VgAPI) {
     // console.log('ready CTRL_ :', api)
@@ -71,9 +75,22 @@ export class PlayerComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
+    const change = this.status$.subscribe((status: Status) => {
+      const time = status.currentTime;
+      const state = status.state
+      this.api.seekTime(time)
 
-    // this.account_id = this.auth.account_id;
-    // console.log(this.account_id);
+      if (state === 'playing') {
+        setInterval( () => {
+
+          if(new Date().getSeconds() === 30) {
+            console.log('sync')
+            this.api.play()
+          }
+        }, 10)
+
+      }
+    })
   }
 
   ngOnChanges() {
@@ -95,7 +112,7 @@ export class PlayerComponent implements OnInit, OnChanges {
     const status = {
       account_id: 'prism_account_001',
       installation_id: 'installation_id',
-      state: this.api.state,
+      state: 'playing',
       currentTime: this.api.currentTime
     }
     console.log(status)
