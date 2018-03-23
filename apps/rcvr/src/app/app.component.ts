@@ -30,27 +30,27 @@ export class AppComponent implements OnInit, OnChanges {
     this.statusDoc = afs.doc<Status>(this.statusRef);
     this.status$ = this.statusDoc.valueChanges();
 
-    this._hotkeysService.add(
-      new Hotkey('meta+shift+g', (event: KeyboardEvent): boolean => {
-        console.log('Typed hotkey');
-        return false; // Prevent bubbling
-      })
-    );
-    this.state = this.signal.status$
-      .subscribe(status => {
-        if(this.api) {
-          this.setTime(status.currentTime)
-        }
-      });
+    // this._hotkeysService.add(
+    //   new Hotkey('meta+shift+g', (event: KeyboardEvent): boolean => {
+    //     console.log('Typed hotkey');
+    //     return false; // Prevent bubbling
+    //   })
+    // );
+    // this.state = this.signal.status$
+    //   .subscribe(status => {
+    //     if(this.api) {
+    //       this.setTime(status.currentTime)
+    //     }
+    //   });
   }
 
   ngOnChanges() {
-    this.status$.subscribe(status => {
-      if (this.api) {
-        this.api.currentTime(status);
-      }
-      console.log('status: ', status)
-    })
+    // this.status$.subscribe(status => {
+    //   if (this.api) {
+    //     this.api.currentTime(status);
+    //   }
+    //   console.log('status: ', status)
+    // })
   }
 
   ngOnInit() {
@@ -60,10 +60,10 @@ export class AppComponent implements OnInit, OnChanges {
     // this.status = this.fire.doc(this.statusRef)
     // console.getVideoApi('status',this.status)
 
-    const change = this.status$.subscribe((status: Status) => {
-      const time = status.currentTime;
-        this.api.seekTime(time);
-    })
+    // const change = this.status$.subscribe((status: Status) => {
+    //   const time = status.currentTime;
+    //     this.api.seekTime(time);
+    // })
   }
 
   signOut() {
@@ -72,16 +72,16 @@ export class AppComponent implements OnInit, OnChanges {
 
   getVideoApi(api: VgAPI) {
 
-    this.api = api;
-    //api.currentTime(this.status.state)
-    this.media = api.getDefaultMedia();
+    // this.api = api;
+    // //api.currentTime(this.status.state)
+    // this.media = api.getDefaultMedia();
   }
 
-  setTime(time) {
-    // const status = this.state;
-    this.api.seekTime(time)
-
-    // console.log(status.currentTime)
-
-  }
+  // setTime(time) {
+  //   // const status = this.state;
+  //   this.api.seekTime(time)
+  //
+  //   // console.log(status.currentTime)
+  //
+  // }
 }

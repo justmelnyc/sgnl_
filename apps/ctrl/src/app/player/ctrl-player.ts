@@ -21,10 +21,11 @@ import {AuthService} from "@sgnl/auth";
       [installation]="'installation_id'">
     </star-review>
     <sig-player [video]="'assets/media/l.mp4'" (playerReady)="getVideoApi($event)"></sig-player>
-    <button class="set set4" (click)="setTime(0); sendStatusSignal()">reset</button>
+    <!--<button class="set set4" (click)="sendStatusSignal('pause')">reset</button>-->
+    <button class="set set4" (click)="sendStatusSignal('pause')">pause</button>
 
     <!--<button class="set" (click)="setTime(40); sendStatusSignal()">set to 40</button>-->
-    <button class="set" (click)="sendStatusSignal()">play</button>
+    <button class="set" (click)="sendStatusSignal('playing')">play</button>
     <button class="set2" (click)="setTime(60); sendStatusSignal()">set to 60</button>
     <button class="set3" (click)="setTime(80); sendStatusSignal()">set to 80</button>
 
@@ -78,7 +79,8 @@ export class PlayerComponent implements OnInit, OnChanges {
     const change = this.status$.subscribe((status: Status) => {
       const time = status.currentTime;
       const state = status.state
-      this.api.seekTime(time)
+
+      // this.api.seekTime(time)
 
       if (state === 'playing') {
         setInterval( () => {
@@ -98,7 +100,7 @@ export class PlayerComponent implements OnInit, OnChanges {
   }
 
   setTime(time) {
-    this.api.seekTime(time);
+    // this.api.seekTime(time);
   }
 
   playFromCtrl() {
@@ -108,11 +110,11 @@ export class PlayerComponent implements OnInit, OnChanges {
     this.api.pause();
   }
 
-  async sendStatusSignal() {
+  async sendStatusSignal(state) {
     const status = {
       account_id: 'prism_account_001',
       installation_id: 'installation_id',
-      state: 'playing',
+      state: state,
       currentTime: this.api.currentTime
     }
     console.log(status)

@@ -8,6 +8,7 @@ import { IFeed } from '@sgnl/player';
   selector: 'sig-player',
   template: `    
     <vg-player class="player" (onPlayerReady)="onPlayerReady($event)">
+      <!--<p>{{video.name}}</p>-->
       <vg-overlay-play></vg-overlay-play>
       <vg-buffering></vg-buffering>
       <!--<sig-buffer></sig-buffer>-->
@@ -29,7 +30,8 @@ import { IFeed } from '@sgnl/player';
              #masterRef
              [vgMedia]="masterRef"
              [vgMaster]="true"
-             [src]="video">
+             [volume]="0"
+             [src]="video.source">
       </video>
     </vg-player>
     
@@ -103,7 +105,7 @@ export class PlayerComponent implements OnInit, OnChanges {
   }
 
   setTime(time) {
-    this.api.seekTime(time);
+    // this.api.seekTime(time);
   }
 
   // onSelectFeed($event: any, index) {

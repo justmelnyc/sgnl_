@@ -16,6 +16,7 @@ import {RoutingModule} from './app.routing'
 import {AuthModule, AuthService} from '@sgnl/auth'
 import {LoginComponent} from './login/login'
 import {AngularFireAuth} from 'angularfire2/auth'
+import { AsyncLocalStorageModule } from 'angular-async-local-storage'
 
 export function coreServices(): Provider[] {
   return [Signal, FirestoreService, AngularFireModule, AngularFireAuth, AngularFirestore, HotkeysService, AuthService];
@@ -31,6 +32,7 @@ export function coreServices(): Provider[] {
     AngularFireModule.initializeApp(environment.firebase),
     RouterModule.forRoot([], { initialNavigation: 'enabled' }),
     RoutingModule,
+    AsyncLocalStorageModule,
     AuthModule,
     HotkeyModule.forRoot()
   ],

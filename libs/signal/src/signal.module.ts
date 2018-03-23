@@ -1,9 +1,11 @@
-import { NgModule, Provider } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { NgModule, Provider } from '@angular/core'
+import { CommonModule } from '@angular/common'
+import { AsyncLocalStorage } from 'angular-async-local-storage'
+
 import { Signal } from './services/signal';
 
 export function coreServices(): Provider[] {
-  return [Signal];
+  return [Signal, AsyncLocalStorage];
 }
 @NgModule({
   imports: [CommonModule],
