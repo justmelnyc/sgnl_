@@ -8,17 +8,15 @@ import {SettingsComponent} from './settings/settings'
 
 export const routes: Routes = [
   { path: '', redirectTo: 'player', pathMatch: 'full' },
-  { path: 'login', component: LoginComponent },
   {
     path: 'player',
     component: PlayerComponent,
-    // canActivate: [AuthGuard],
     data: { animation: 'home' },
   },
+  { path: 'login', component: LoginComponent },
   {
     path: 'settings',
     component: SettingsComponent,
-    canActivate: [AuthGuard],
     data: { animation: 'home' },
   },
   { path: 'accounts/:id', component: PlayerComponent },
