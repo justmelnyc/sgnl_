@@ -16,9 +16,9 @@ import {AuthService} from "@sgnl/auth";
 
     <h2 class="heading">Dispatches Commands</h2>
 
-    <star-review
-      [account]="'prism_account_001'"
-      [installation]="'installation_id'">
+    <!--<star-review-->
+      <!--[account]="'prism_account_001'"-->
+      <!--[installation]="'installation_id'">-->
     </star-review>
     <sig-player [video]="'assets/media/l.mp4'" (playerReady)="getVideoApi($event)"></sig-player>
     <!--<button class="set set4" (click)="sendStatusSignal('pause')">reset</button>-->

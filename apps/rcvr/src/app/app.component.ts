@@ -16,72 +16,31 @@ import {AuthService} from '@sgnl/auth'
   `,
   styles: [``]
 })
-export class AppComponent implements OnInit, OnChanges {
-  private statusDoc: AngularFirestoreDocument<Status>;
-  state;
-  api: VgAPI;
-  media;
+export class AppComponent implements OnInit {
+  // private statusDoc: AngularFirestoreDocument<Status>;
+  // state;
+  // api: VgAPI;
+  // media;
 
   // firebase video url: https://firebasestorage.googleapis.com/v0/b/signal-dvlp.appspot.com/o/nike.mp4?alt=media&token=4577e160-2b2a-436f-88e3-bf83421fd0f5
 
-  statusRef = '/status/prism_account_001_installation_id';
-  status$: Observable<Status>;
+  // statusRef = '/status/prism_account_001_installation_id';
+  // status$: Observable<Status>;
+
   constructor(private signal: Signal, private _hotkeysService: HotkeysService, private afs: AngularFirestore, private auth: AuthService) {
-    this.statusDoc = afs.doc<Status>(this.statusRef);
-    this.status$ = this.statusDoc.valueChanges();
-
-    // this._hotkeysService.add(
-    //   new Hotkey('meta+shift+g', (event: KeyboardEvent): boolean => {
-    //     console.log('Typed hotkey');
-    //     return false; // Prevent bubbling
-    //   })
-    // );
-    // this.state = this.signal.status$
-    //   .subscribe(status => {
-    //     if(this.api) {
-    //       this.setTime(status.currentTime)
-    //     }
-    //   });
+    // this.statusDoc = afs.doc<Status>(this.statusRef);
+    // this.status$ = this.statusDoc.valueChanges();
   }
 
-  ngOnChanges() {
-    // this.status$.subscribe(status => {
-    //   if (this.api) {
-    //     this.api.currentTime(status);
-    //   }
-    //   console.log('status: ', status)
-    // })
-  }
 
   ngOnInit() {
 
-    // this.status$
 
-    // this.status = this.fire.doc(this.statusRef)
-    // console.getVideoApi('status',this.status)
-
-    // const change = this.status$.subscribe((status: Status) => {
-    //   const time = status.currentTime;
-    //     this.api.seekTime(time);
-    // })
   }
 
   signOut() {
     this.auth.signOut();
   }
 
-  getVideoApi(api: VgAPI) {
 
-    // this.api = api;
-    // //api.currentTime(this.status.state)
-    // this.media = api.getDefaultMedia();
-  }
-
-  // setTime(time) {
-  //   // const status = this.state;
-  //   this.api.seekTime(time)
-  //
-  //   // console.log(status.currentTime)
-  //
-  // }
 }

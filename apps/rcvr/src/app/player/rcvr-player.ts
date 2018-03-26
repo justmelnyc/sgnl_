@@ -6,6 +6,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import {SigEvents, Signal, Status} from '@sgnl/signal'
 import { Observable } from 'rxjs/Observable';
 import {VgAPI} from 'videogular2/core'
+import {AppSettings, AppSettingsService} from '../settings/service'
 
 
 
@@ -22,31 +23,26 @@ export interface INode {
     <h2 class="heading">RCVR_</h2>
     <h2 class="heading">status : {{  (status$ | async)?.state}}</h2>
 
-    <h2 class="heading">Receives Commands {{ status$ | async | json }}</h2>
+    <!--<h2 class="heading">Receives Commands {{ status$ | async | json }}</h2>-->
 
-    <button class="set" (click)="setTime()">set to 80</button>
+    <!--<button class="set" (click)="setTime()">set to 80</button>-->
     
-    <star-review
-      [account]="'prism_account_001'"
-      [installation]="'installation_id'">
-    </star-review>
-    <button class="local set setL" (click)="onSetNode(0)">Set Node L</button>
-    <button class="local set setR" (click)="onSetNode(1)">Set Node R</button>
-    
-    <button class="set setL" (click)="onSelectNode(0)">L</button>
-    <button class="set setR" (click)="onSelectNode(1)">R</button>
+    <button class="local L" (click)="onSelectNode(0)">Set to left Node</button>
+    <button class="local R" (click)="onSelectNode(1)">Set to right Node</button>
+    <!---->
+    <!--<button class="set setL" (click)="onSelectNode(0)">L</button>-->
+    <!--<button class="set setR" (click)="onSelectNode(1)">R</button>-->
 
-    <sig-player
-      (playerReady)="getVideoApi($event)"
-      [video]="selectedNode">
-      
-    </sig-player>
-    <router-outlet></router-outlet>
+    <sig-player (playerReady)="getVideoApi($event)"
+      [video]="selectedNode"></sig-player>
   `,
   styleUrls: ['rcvr-player.scss']
 })
 export class PlayerComponent implements OnInit {
   private statusDoc: AngularFirestoreDocument<Status>;
+
+  settings: AppSettings;
+
   state;
   api: VgAPI;
   media;
@@ -69,7 +65,7 @@ export class PlayerComponent implements OnInit {
 
 
 
-  constructor(private signal: Signal, private _hotkeysService: HotkeysService, private afs: AngularFirestore) {
+  constructor(private signal: Signal,private appSettingsService: AppSettingsService, private _hotkeysService: HotkeysService, private afs: AngularFirestore) {
     this.statusDoc = afs.doc<Status>(this.statusRef)
     this.status$ = this.statusDoc.valueChanges()
 
@@ -85,11 +81,17 @@ export class PlayerComponent implements OnInit {
 
   ngOnInit() {
 
-    // this.onGetNode().then(id => {
-    //   this.id = id;
-    // })
-
-
+    this.appSettingsService.getSettings()
+      .subscribe(settings => {
+          this.settings = settings
+          const node = this.settings.node;
+          this.onSelectNode(node)
+      },
+        () => null,
+        () => {
+          // this.id = new Product();
+          // this.product.url = this.settings.defaultUrl;
+        });
 
     // ${account_id}/${installation_id}/${node_id}/${status}
 
@@ -143,9 +145,11 @@ export class PlayerComponent implements OnInit {
 
   }
 
-  onSelectNode(index) {
-    if (index >= 0) {
-      this.selectedNode = this.nodes[index];
+  onSelectNode(node) {
+    if (node >= 0) {
+      console.log('node selected: '+ node)
+      this.selectedNode = this.nodes[node];
+      this.saveSettings(node)
     } else {
       this.selectedNode = { id: null } as INode;
     }
@@ -169,5 +173,15 @@ export class PlayerComponent implements OnInit {
     //await this.signal.getItem('node')
     return this.signal.getConfigId()
     // this.onSelectNode(id)
+  }
+
+
+  saveSettings(node): void {
+    console.log('setting to :'+ node)
+    this.appSettingsService.saveSettings({node, isFromLocalStorage: true});
+  }
+
+  deleteSettings(): void {
+    this.appSettingsService.deleteSettings();
   }
 }

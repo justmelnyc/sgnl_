@@ -31,12 +31,33 @@
   z-index: 1000;
 }
 .setL {
-  top: 500px;
+  top: 200px;
   right: 200px
 }
 .setR {
-  top: 500px;
+  top: 200px;
 }
 .local {
-  top: 600px;
+  font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+  position: absolute;
+  color: #242424;
+  background: #FFFFFF;
+  cursor: pointer;
+  text-decoration: none;
+  font-weight: lighter;
+  border-radius: 5px;
+  margin: 10px;
+  z-index: 1000;
+  bottom: 20px;
+  right: 0;
+  padding: 1rem;
 }
+
+.L {
+  right: 200px;
+}
+
+.R {
+
+}
+

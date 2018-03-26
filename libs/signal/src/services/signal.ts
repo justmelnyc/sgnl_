@@ -7,7 +7,6 @@ import { Observable } from 'rxjs/Observable'
 import { SigStates } from '@sgnl/signal'
 import { VgAPI } from 'videogular2/core'
 import {BehaviorSubject} from 'rxjs/BehaviorSubject'
-import {AsyncLocalStorage} from 'angular-async-local-storage'
 // import {INode} from '../../../../apps/rcvr/src/app/player/rcvr-player'
 
 export interface Status {
@@ -37,7 +36,7 @@ export class Signal {
 
   public status$: Observable<Status> = this.statusSource.asObservable()
 
-  constructor(private afs: AngularFirestore, private video: VgAPI, protected localStorage: AsyncLocalStorage) {}
+  constructor(private afs: AngularFirestore, private video: VgAPI) {}
 
   // status methods
 
@@ -72,12 +71,6 @@ export class Signal {
   }
 
 
-
-
-
-
-
-
   getAccountStatus(account_id) {
     const statusRef = this.afs.collection('status', ref => ref.where('account_id', '==', account_id))
     return statusRef.valueChanges()
@@ -91,19 +84,19 @@ export class Signal {
     return statusRef.valueChanges()
   }
 
-  setNodeIndex(id) {
-    const node = { id: id };
-    this.localStorage.setItem('node', node).subscribe(() => {});
-  }
-
-  getNodeIndex() {
-    const id = null;
-
-    this.localStorage.getItem('node').subscribe((node) => {
-      return node.id;
-    });
-
-  }
+  // setNodeIndex(id) {
+  //   const node = { id: id };
+  //   this.localStorage.setItem('node', node).subscribe(() => {});
+  // }
+  //
+  // getNodeIndex() {
+  //   const id = null;
+  //
+  //   this.localStorage.getItem('node').subscribe((node) => {
+  //     return node.id;
+  //   });
+  //
+  // }
 
 
 
